@@ -17,12 +17,28 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+
+
+import java.util.Calendar;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.TimePicker;
+
 import java.text.DateFormat;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
+    //Time picker variables
     private TimePicker timePicker1;
+    private TextView timeDisplay;
+    private Calendar calendar;
+    private String format = "";
+
 
 
     @Override
@@ -31,10 +47,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
-
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     public void openUserInputView(View view) {
