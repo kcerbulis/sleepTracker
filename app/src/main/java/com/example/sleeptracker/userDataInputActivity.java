@@ -19,9 +19,12 @@ import java.util.Locale;
 public class userDataInputActivity extends AppCompatActivity {
     private TimePicker timePicker1;
     private TextView time;
-    private TextView curTimeText, hourTxt, minTxt, timeSleeping;
+    private TextView curTimeText, hourTxt, minTxt, timeSleeping, remCyclesCount;
     private Calendar calendar;
     private String format = "";
+
+    int hourSleep;
+    int minSleep;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,22 +35,17 @@ public class userDataInputActivity extends AppCompatActivity {
         time = (TextView) findViewById(R.id.textView1);
         calendar = Calendar.getInstance();
 
+        //Gets selected time from time selector
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int min = calendar.get(Calendar.MINUTE);
         showTime(hour, min);
 
-
-        //Gets textbox to display current time
+        //Selects specific TextViews
         curTimeText = (TextView) findViewById(R.id.curTime);
-
         timeSleeping =  (TextView) findViewById(R.id.timeSleep);
-
+        remCyclesCount = (TextView) findViewById(R.id.remCyclesCount);
 
     }
-
-
-
-
 
 
     public void openThirdView(View view) {
@@ -82,18 +80,45 @@ public class userDataInputActivity extends AppCompatActivity {
         int curTimeHour = Integer.parseInt(curTimeHourString);
         int curTimeMin = Integer.parseInt(curTimeMinString);
 
-        int hourSleep = hour - curTimeHour;
-        int minSleep = min - curTimeMin;
 
-        if(hourSleep <= 0){
-            hourSleep = 12 + (-1 * (curTimeHour - hour));
+        //-------------------------------Time difference calculation-------------------------------
+        if(min > curTimeMin){
+            hourSleep = hour - curTimeHour;
+            minSleep = min - curTimeMin;
         }
 
-        if((minSleep) < 0){
-            int minSleepReamain = minSleep;
-            hourSleep--;
-            minSleep = 60 + minSleepReamain;
+        else if(min <= curTimeMin){
+            min += 60;
+            hour--;
+            hourSleep = hour - curTimeHour;
+            minSleep = min - curTimeMin;
         }
+
+        if(minSleep == 60){
+            minSleep = 0;
+            hourSleep++;
+        }
+
+        if(hourSleep < 0){
+            hourSleep = 24 + hourSleep;
+        }
+        //-----------------------------------------------------------------------------------------
+
+        
+        //++++++++++++++++++++++++++++++Display string builders++++++++++++++++++++++++++++++++++++
+
+        remCyclesCount.setText(new StringBuilder().append("69"));
+
+
+
+
+        if(String.valueOf(hourSleep).length() == 2){
+            timeSleeping.setText(new StringBuilder().append(hourSleep).append(" : 0").append(minSleep)
+                    .append(" "));
+
+
+        }
+
 
         if(String.valueOf(minSleep).length() == 1){
             timeSleeping.setText(new StringBuilder().append(hourSleep).append(" : 0").append(minSleep)
@@ -106,20 +131,9 @@ public class userDataInputActivity extends AppCompatActivity {
     }
 
     public void showTime(int hour, int min) {
-        if (hour == 0) {
-            hour += 12;
-            format = "AM";
-        } else if (hour == 12) {
-            format = "PM";
-        } else if (hour > 12) {
-            hour -= 12;
-            format = "PM";
-        } else {
-            format = "AM";
-        }
-
         time.setText(new StringBuilder().append(hour).append(" : ").append(min)
                 .append(" ").append(format));
     }
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 }
