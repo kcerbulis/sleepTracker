@@ -10,6 +10,7 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 
 import android.view.Menu;
@@ -47,6 +48,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        setupHyperlinks();
+    }
+
+    private void setupHyperlinks() {
+        TextView linkTextView1 = findViewById(R.id.sleepImportanceLink);
+        linkTextView1.setMovementMethod(LinkMovementMethod.getInstance());
+
+        TextView linkTextView2 = findViewById(R.id.sleepDeprivationLink);
+        linkTextView2.setMovementMethod(LinkMovementMethod.getInstance());
+
+        TextView linkTextView3 = findViewById(R.id.sleepBetterLink);
+        linkTextView3.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
 

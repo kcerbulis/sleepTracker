@@ -15,6 +15,12 @@
     <string name="time_current">The Time is:</string>
     <!--Time picker strings-->
 
+    <!--Hyperlink string-->
+    <string name="sleepImportance"><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6281147/">Importance of Sleep</a></string>
+    <string name="sleepDeprivation"><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2656292/">Sleep Deprivation</a></string>
+    <string name="sleepBetter"><a href="https://www.helpguide.org/articles/sleep/getting-better-sleep.htm">Sleep Better</a></string>
+
+
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>
