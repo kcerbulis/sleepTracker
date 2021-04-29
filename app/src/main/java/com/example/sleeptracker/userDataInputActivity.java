@@ -5,20 +5,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import android.view.View;
-import android.widget.Button;
-import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import java.util.Calendar;
+
 import java.util.Date;
-import java.util.Locale;
 
 
 public class userDataInputActivity extends AppCompatActivity {
+
+    //Final Variables needed for db;
+    private static Integer TimePickerHour;
+    private static Integer TimePickerMinute;
+    private static int starRating;
+    private static Date timeOfWaking;
+
+
     //Initializing variables
     private TimePicker timePicker1;
     private TextView time;
@@ -27,6 +33,7 @@ public class userDataInputActivity extends AppCompatActivity {
     private String format = "";
     int hourSleep;
     int minSleep;
+
 
     //FAB button function to open first view
     public void openFirstView(View view) {
@@ -55,7 +62,9 @@ public class userDataInputActivity extends AppCompatActivity {
 
         //5 star sleep rating initialized
         //Use .getRating to get selected value
-        final RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+        //final RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+        //starRating = ratingBar.getNumStars();
+
 
         //Gets selected time from time selector
         calendar = Calendar.getInstance();
@@ -64,16 +73,31 @@ public class userDataInputActivity extends AppCompatActivity {
         showTime(hour, min);
     }
 
+
+
+
+
+
     //Called when the save button is pressed
     //Calculates sleep time, REM and sleep rating
-    public void setTime(View view) {
+    public void setTime(View view) throws ParseException {
 
         //Gets values selected from time picker
         int hour = timePicker1.getCurrentHour();
         int min = timePicker1.getCurrentMinute();
 
+        TimePickerHour = timePicker1.getCurrentHour();
+        TimePickerMinute = timePicker1.getCurrentMinute();
+
         //Formats date data to give us time in 24h format
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+
+        String dateString= TimePickerHour+":"+TimePickerMinute;
+        timeOfWaking = formatter.parse(dateString);
+
+
+
+
 
 
         //Displays current time
@@ -156,4 +180,33 @@ public class userDataInputActivity extends AppCompatActivity {
                 .append(" ").append(format));
     }
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+    //Getters and Setters for Data Values:
+
+
+
+    public static int getStarRating() {
+        return starRating;
+    }
+
+    public static Date getTimeOfWaking() {
+        return timeOfWaking;
+    }
+
+    public static int getWakeHour() {
+        return TimePickerHour;
+    }
+
+    public static int getWakeMinute() {
+        return TimePickerMinute;
+    }
+
+
+
+
+
 }
+
+

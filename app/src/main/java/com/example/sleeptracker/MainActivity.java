@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         setupHyperlinks();
+
+
     }
 
     private void setupHyperlinks() {
@@ -86,6 +88,14 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+
+    public void onButtonClicked(View view) {
+
+        Intent intent = new Intent(this, graphs.class);
+        startActivity(intent);
+
+    }
 
 
 
